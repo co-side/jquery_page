@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script
+  src="//code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="scroll.css">
+  <title>Scroll Page</title>
+</head>
+<body>
+  <h1>JQuery scroll to top and bottom plugin demo</h1>
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer semper augue at mauris tincidunt placerat. Proin eget pharetra massa. Praesent sed ex nibh. Sed at dolor lobortis nisl efficitur efficitur sed consequat ipsum. Donec ligula risus, cursus at tempor nec, molestie ac odio. Quisque tellus enim, cursus et tortor semper, fringilla dictum lacus. Maecenas ullamcorper arcu leo, vel iaculis magna faucibus eget. Nulla eu interdum erat. Integer viverra efficitur elit, id venenatis nisi fringilla quis.
+  <br>
+  <br>
+  Aenean feugiat nisi justo, euismod sodales erat euismod vitae. Morbi aliquam neque non nunc dignissim, sit amet tempus nibh varius. Aenean ullamcorper lacinia nunc, eget sollicitudin turpis lacinia et. Nulla id congue dui. Aenean sapien urna, feugiat interdum mi ac, lobortis sagittis odio. In suscipit in nibh et bibendum. Quisque ac ante porta, pretium purus gravida, iaculis massa. Donec id elit id dui dignissim faucibus. Ut tristique magna at tellus tristique finibus sed eget diam. Donec sed consequat nisi, vitae tincidunt justo. Aliquam sem ante, aliquet finibus eros accumsan, dignissim egestas turpis. Vivamus eleifend fermentum arcu, in cursus quam ultrices at. Cras non blandit nulla.
+  <br>
+  <br>
+  Quisque fringilla maximus vestibulum. Sed in laoreet diam. Maecenas vel lacus efficitur, egestas purus nec, consequat dui. Nam sagittis consequat eleifend. Mauris suscipit vulputate purus eu pellentesque. Etiam ut quam vitae risus vulputate vehicula nec ut mi. Maecenas ac ligula luctus odio porta vestibulum vitae nec justo. Vestibulum libero lectus, viverra sit amet sollicitudin et, tristique et urna. Nunc aliquet, massa vel posuere suscipit, augue nisl suscipit ligula, a pellentesque augue dui ut metus. Duis pulvinar odio sed rutrum elementum. Donec vitae leo tristique, tempor ex ac, semper ante.
+  <br>
+  <br>
+  Quisque porta sem vitae posuere lobortis. Maecenas sit amet ultrices mi, at laoreet risus. Nulla consectetur iaculis ornare. In porta pulvinar ex nec lobortis. Vivamus sit amet maximus lacus. Pellentesque at elit ut leo ultrices rhoncus. Sed accumsan libero ut finibus ornare. Nullam pulvinar magna sed pharetra iaculis. Phasellus molestie rhoncus turpis sed condimentum. Vestibulum lorem lorem, porta vel velit id, porttitor varius velit.
+  <br>
+  <br>
+  Ut vel eros nec ante maximus tristique. Pellentesque vitae nibh id lectus blandit auctor scelerisque non lorem. Quisque placerat eu nisi vel volutpat. Suspendisse laoreet purus id purus lacinia, ac volutpat odio ultrices. Donec augue dolor, malesuada eget fermentum eu, tincidunt sed felis. Morbi quis velit in velit venenatis tempor nec eu nisi. Proin in eros feugiat, laoreet sapien ac, volutpat est. Integer ac libero eu ante hendrerit dictum. Cras euismod libero nisl, dictum interdum est lobortis quis. Pellentesque neque nisi, finibus ac diam vitae, pharetra tristique nisl. Ut quis erat et dui condimentum finibus a eget eros. Pellentesque justo eros, molestie rutrum felis blandit, pharetra pulvinar metus. Vestibulum luctus a lacus id scelerisque. Fusce imperdiet dignissim eros quis interdum. Curabitur a nisl consequat, sagittis urna ut, interdum leo.
+  <br>
+  <br>
+  Suspendisse commodo porta consectetur. Vivamus in erat nisi. Cras ut eros pulvinar, lacinia nibh eu, faucibus libero. Morbi placerat leo ac ante vulputate tincidunt. Proin tellus nisi, aliquam ac risus quis, varius molestie elit. Vestibulum massa odio, fringilla id blandit sit amet, vehicula in mauris. Ut a velit sed nisi porta gravida. Cras dolor sem, bibendum in feugiat a, ullamcorper sit amet tellus. Sed ac tristique urna. Duis faucibus eros id leo tristique malesuada.
+  <br>
+  <button id="scroll-top" class="button">上へ</button>
+  <button id="scroll-bottom" class="button">下へ</button>
+  <script>
+    $(function(){
+      let scroll_element = document.scrollingElement;
+      if (document.scrollingElement === undefined){
+        scroll_element = document.documentElement;
+      }
+      const switch_button_state = function(){
+        const height = scroll_element.scrollTop;
+        const doch = $(document).innerHeight();
+        const winh = $(window).innerHeight();
+        console.log(doch);
+        console.log(winh);
+        const bottom = doch - winh;
+        if (doch === winh){
+          $("#scroll-top").prop("disabled", true);
+          $("#scroll-bottom").prop("disabled", true);
+        }else if (height === 0){
+          $("#scroll-top").prop("disabled", true);
+          $("#scroll-bottom").prop("disabled", false);
+        }else if(height === bottom){
+          $("#scroll-top").prop("disabled", false);
+          $("#scroll-bottom").prop("disabled", true);
+        }else{
+          $("#scroll-top").prop("disabled", false);
+          $("#scroll-bottom").prop("disabled", false);
+        }
+      }
+      switch_button_state();
+      $('#scroll-bottom').click(function() {
+        $(scroll_element).animate({scrollTop: $(scroll_element).height()});
+      })
+      $('#scroll-top').click(function() {
+        $(scroll_element).animate({scrollTop: 0});
+      })
+      window.addEventListener('scroll', function() {
+        switch_button_state();
+      }, false);
+    });
+  </script>
+</body>
+</html>

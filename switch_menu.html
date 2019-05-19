@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script
+  src="//code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="menu.css">
+  <title>Switch Menu Page</title>
+</head>
+<body>
+  <header>
+    <ul>
+      <li><a href="#" class="menu target">ウェブ</a></li>
+      <li><a href="#" class="menu">ニュース</a></li>
+      <li><a href="#" class="menu">ショッピング</a></li>
+      <li><a href="#" class="menu">地図</a></li>
+      <li>
+        <input type="checkbox" id="search" /><label for="search" class="check-label">検索ツール</label>
+      </li>
+    </ul>
+  </header>
+  <div id="container">
+    <div class="content active">
+      約 1,030,000 件
+    </div>
+    <div class="content">
+      約 30,000 件
+    </div>
+    <div class="content">
+      約 430,000 件
+    </div>
+    <div class="content">
+      佐賀県佐賀市
+    </div>
+    <div class="search-option">
+      検索オプション
+    </div>
+  </div>
+  <script>
+    $(function() {
+      let index = 0;
+      $(".menu").click(function(){
+        index = $('ul li').index($(this).parent('li'));
+        $("#search").prop('checked', false);
+        $(".menu").removeClass("target");
+        $(this).addClass("target");
+        $("#container div").removeClass("active").eq(index).addClass("active");
+      })
+      $("#search").change(function(){
+        if($("#search:checked").val()) {
+          $("#container div").removeClass("active");
+          $(".search-option").addClass("active");
+        }else {
+          $("#container div").eq(index).addClass("active");
+          $(".search-option").removeClass("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
